@@ -2,12 +2,13 @@ function [grey] = finger_find_grey(i, m, r, avg, key)
 %% Calculate the grey values for the finger experiment
 % Grey values are the average euclidean distance of each sample of
 % keys not from a specified key from the specified average vector
-%   param i: the index finger data
-%   param m: the middle finger data
-%   param r: the ring finger data
-%   param avg: the average vector
-%   param key: the key of the samples to be excluded
+%   param i: Index finger data
+%   param m: Middle finger data
+%   param r: Ring finger data
+%   param avg: Average vector
+%   param key: Key of the samples to be excluded
 grey = [];
+%% Index finger
 i_avg_dist = 0;
 for k = 0:9
     if k ~= key
@@ -20,6 +21,7 @@ for k = 0:9
     end
 end
 
+%% Middle finger
 m_avg_dist = 0;
 for k = 0:9
     if k ~= key
@@ -32,6 +34,7 @@ for k = 0:9
     end
 end
 
+%% Ring finger
 r_avg_dist = 0;
 for k = 0:9
     if k ~= key

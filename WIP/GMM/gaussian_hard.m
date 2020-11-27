@@ -1,15 +1,16 @@
 %% Classifys data using a Gaussian Mixture Model
 clear; clc; close all;
-% In 1 attacker, 4 victim scenario, first 4 victim vars are used as
-% victims
-attacker = 'data_segmented/17-Aug-2020_diego_10key_sum_P5.mat';   %file should match line 12
+% Experiment 1: 5 victims
+% Experiment 2: 4 victims, 1 attacker
+% Experiment 2, the first 4 victim variables are used as victims
+attacker = 'data_segmented/17-Aug-2020_diego_10key_sum_P5.mat'; %file should match line 12
 
-victim1 = 'data_segmented/17-Aug-2020_diego_10key_sum_P1.mat';   %these 4 should not match line 5 
+victim1 = 'data_segmented/17-Aug-2020_diego_10key_sum_P1.mat'; %these 4 should not match line 5 
 victim2 = 'data_segmented/17-Aug-2020_diego_10key_sum_P2.mat';
 victim3 = 'data_segmented/17-Aug-2020_diego_10key_sum_P3.mat';
 victim4 = 'data_segmented/17-Aug-2020_diego_10key_sum_P4.mat';
 
-victim5 = 'data_segmented/17-Aug-2020_diego_10key_sum_P5.mat';    %file should match line 5
+victim5 = 'data_segmented/17-Aug-2020_diego_10key_sum_P5.mat'; %file should match attacker
 %% Prepare data
 [a, a_s] = prep_sum_data(attacker);
 [v1, v1_s] = prep_sum_data(victim1);
@@ -49,12 +50,15 @@ victim_data4 = kmeans_arr_prep(v4);
 victim_data5 = kmeans_arr_prep(v5);
 victim_data_exp1 = vertcat(victim_data1, victim_data2, victim_data3, victim_data4, victim_data5);
 victim_data_exp2 = vertcat(attacker_data, victim_data1, victim_data2, victim_data3, victim_data4);
+
+%% Experiment 1 Gaussiam mixture model
 options = statset('Display','iter','MaxIter',1500,'TolFun',1e-5);
 gm1 = fitgmdist(victim_data_exp1,10,'Options',options);
 idx = cluster(gm1, victim_data_exp1);
 acc = kmeans_acc(idx.');
 disp("Experiment 1: " + acc + "%");
 
+%% Experiment 2 Gaussiam mixture model
 gm2 = fitgmdist(victim_data_exp2,10,'Options',options);
 idx = cluster(gm2, victim_data_exp1);
 acc = kmeans_acc2(idx.');

@@ -10,8 +10,9 @@ function [grey] = people_find_grey(p1, p2, p3, p4, p5, avg, key)
 %   param avg: the average vector of key
 %   param key: the key of the samples to be excluded
 grey = [];
-p1_avg_dist = 0;
+%% Person 1
 for k = 0:9
+    p1_avg_dist = 0;
     if k ~= key
         for s=1:30
             p1_sample = p1{10*k+s};
@@ -22,8 +23,9 @@ for k = 0:9
     end
 end
 
-p2_avg_dist = 0;
+%% Person 2
 for k = 0:9
+    p2_avg_dist = 0;
     if k ~= key
         for s=1:30
             p2_sample = p2{10*k+s};
@@ -34,8 +36,9 @@ for k = 0:9
     end
 end
 
-p3_avg_dist = 0;
+%% Person 3
 for k = 0:9
+    p3_avg_dist = 0;
     if k ~= key
         for s=1:30
             p3_sample = p3{10*k+s};
@@ -46,8 +49,9 @@ for k = 0:9
     end
 end
 
-p4_avg_dist = 0;
+%% Person 4
 for k = 0:9
+    p4_avg_dist = 0;
     if k ~= key
         for s=1:30
             p4_sample = p4{10*k+s};
@@ -58,8 +62,9 @@ for k = 0:9
     end
 end
 
-p5_avg_dist = 0;
+%% Person 5
 for k = 0:9
+    p5_avg_dist = 0;
     if k ~= key
         for s=1:30
             p5_sample = p5{10*k+s};

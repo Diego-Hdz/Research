@@ -3,21 +3,25 @@
 % applies threefold cross-validation
 %% Parameters
 clc; clear; close all;
-i_file = "data_segmented/18-Sep-2020_diego_30key_sum_4.mat";
+i_file = "data_p/15-Jul-2020_diego_10keyP1.mat";
 %data_segmented/17-Aug-2020_diego_10key_sum_P1.mat
 %data_segmented/18-Sep-2020_diego_30key_sum_4.mat
-num_keys=10;
-num_samples=30;
+%data_p/15-Jul-2020_deigo_10keyP1.mat
+num_keys = 10;
+num_samples = 30;
+num_train = 20;
+num_test = 10;
 kfold = 3;
 start = datetime;
 range = (1:1:num_samples/kfold);
-i_data = load(i_file, 'data');
-data = concatenate(i_data.data);
+data = prep_az_data(i_file);
+data = concatenate(data);
 best_acc = zeros(1,3);
 
 %% Classification
 for kf=1:kfold
-    [trainingData,testData,trainingLabels,testLabels] = avgAlgPrep(data,num_keys,num_samples,range);
+    [trainingData,testData,trainingLabels,testLabels] = nnPrep_rep(data,num_keys, num_samples,num_train,num_test);
+    %[trainingData,testData,trainingLabels,testLabels] = avgAlgPrep(data,num_keys,num_samples,range);
     avgs = avgAlgGener(trainingData);
     [~, acc] = avgAlgComp(avgs, testData, testLabels);
     best_acc(kf) = acc;

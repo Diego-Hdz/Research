@@ -74,12 +74,12 @@ victim_data5 = kmeans_arr_prep(v5);
 victim_data_exp1 = vertcat(victim_data1, victim_data2, victim_data3, victim_data4, victim_data5);
 victim_data_exp2 = vertcat(attacker_data, victim_data1, victim_data2, victim_data3, victim_data4);
 
-%% Run K-Means Experiment 1
+%% Experiment 1 k-means
 [res1, C1] = k_means(victim_data_exp1);
 acc = kmeans_acc(res1);
 disp("Experiment 1: " + acc + "%");
 
-%% Run K-Means Experiment 2
+%% Experiment 2 k-means
 [res2, C2] = k_means(victim_data_exp2);
 acc = kmeans_acc2(res2);
 disp("Experiment 2: " + acc + "%");

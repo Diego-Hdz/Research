@@ -8,20 +8,20 @@ function [grey, red] = people(p1, p2, p3, p4, p5, key)
 %   param key: key to perform analysis on
 
 %% Preparation
-[p1_data, p1_s] = prep_data(p1);
-[p2_data, p2_s] = prep_data(p2);
-[p3_data, p3_s] = prep_data(p3);
-[p4_data, p4_s] = prep_data(p4);
-[p5_data, p5_s] = prep_data(p5);
+[p1_data, p1_s] = prep_az_data(p1);
+[p2_data, p2_s] = prep_az_data(p2);
+[p3_data, p3_s] = prep_az_data(p3);
+[p4_data, p4_s] = prep_az_data(p4);
+[p5_data, p5_s] = prep_az_data(p5);
 key_range = [30*key + 1, 30*key + 30];
 
 %% Adjustments
 shortest = min([p1_s, p2_s, p3_s, p4_s, p5_s]);
-p1_data = shorten(p1_data, shortest);
-p2_data = shorten(p2_data, shortest);
-p3_data = shorten(p3_data, shortest);
-p4_data = shorten(p4_data, shortest);
-p5_data = shorten(p5_data, shortest);
+p1_data = shorten_az(p1_data, shortest);
+p2_data = shorten_az(p2_data, shortest);
+p3_data = shorten_az(p3_data, shortest);
+p4_data = shorten_az(p4_data, shortest);
+p5_data = shorten_az(p5_data, shortest);
 
 %% Concatenation of data (ax-ay-az-gx-gy-gz)
 p1_data = concatenate(p1_data);

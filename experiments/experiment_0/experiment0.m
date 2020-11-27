@@ -6,7 +6,7 @@ function [filtered] = experiment0(folder, f, fs, sensor, axis)
 %   param sample: data sample to graph (ex: 9)(0 - 9)
 %   param sensor: sensor data to use ('a' or 'g')
 %   param axis: sensor axis to use ('x' or 'y' or 'z')
-%% Load and Filter
+%% Load
 close all;
 load(folder, 'rawdata', 'seginfo');
 n = 10; %shorten to n signals
@@ -19,6 +19,7 @@ else
 end
 
 for key=0:9
+    %% Filter
     original = rawdata(key+1).(sensor).(axis);
     original = original(1: seginfo.peaks_b{1,key+1}(n+1));
     [filtered, ~] = highpass(original, f, fs);
@@ -26,7 +27,7 @@ for key=0:9
     %[b,a] = butter(2, f/fs*2, 'high');
     %filtered = filter(b, a, original);
 
-    %% Plot Figures
+    %% Plot
     figure
     tiledlayout(2,2);
 
@@ -61,6 +62,8 @@ for key=0:9
     width = 1000;
     height= 700;
     set(gcf, 'position', [x0, y0, width, height]);
+    
+    %% Save
     savefig(sprintf("experiments/experiment_0/figures_exp0/Filter_Test_%d%s%s_%dHz", key, sensor, axis, f));
     %savas(gcf, sprintf("experiments/experiment_0/figures_exp0/Filter_Test_%d%s%s_%dHz.png", key, sensor, axis, f));
     close all;
