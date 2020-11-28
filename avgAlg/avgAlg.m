@@ -4,9 +4,8 @@
 %% Parameters
 clc; clear; close all;
 i_file = "data_p/15-Jul-2020_diego_10keyP1.mat";
-%data_segmented/17-Aug-2020_diego_10key_sum_P1.mat
-%data_segmented/18-Sep-2020_diego_30key_sum_4.mat
-%data_p/15-Jul-2020_deigo_10keyP1.mat
+repeated = true;
+rand = repeated && true;
 num_keys = 10;
 num_samples = 30;
 num_train = 20;
@@ -20,9 +19,12 @@ best_acc = zeros(1,3);
 
 %% Classification
 for kf=1:kfold
-    [trainingData,testData,trainingLabels,testLabels] = nnPrep_rep(data,num_keys, num_samples,num_train,num_test);
-    %[trainingData,testData,trainingLabels,testLabels] = avgAlgPrep(data,num_keys,num_samples,range);
-    avgs = avgAlgGener(trainingData);
+    if repeated
+        [trainingData,testData,trainingLabels,testLabels] = nnPrep_rep(data,num_keys,num_samples,num_train,num_test,rand);
+    else
+        [trainingData,testData,trainingLabels,testLabels] = nnPrep_seq(data,num_keys,num_samples,num_train,num_test);
+    end
+    avgs = avgAlgGener(trainingData, repeated);
     [~, acc] = avgAlgComp(avgs, testData, testLabels);
     best_acc(kf) = acc;
     range = range + num_samples/kfold;

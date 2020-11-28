@@ -1,4 +1,4 @@
-function [trainingData,testData,trainingLabels,testLabels] = nnPrep_rep(data,num_keys,num_samples,num_train,num_test)
+function [trainingData,testData,trainingLabels,testLabels] = nnPrep_rep(data,num_keys,num_samples,num_train,num_test, rand)
 %% Generates training and testing data and labels for classification
 % Specifically for data collected as repeated taps (0,0,0,0, x30, then 1,1,1,1, x30, etc.) 
 %   param data: Input Data
@@ -10,8 +10,11 @@ function [trainingData,testData,trainingLabels,testLabels] = nnPrep_rep(data,num
 trainingData = zeros(num_train*num_keys,length(data{1,1}));
 testData = zeros(num_test*num_keys,length(data{1,1}));
 for k=1:num_keys
-    % x = randperm(num_samples); % Randomly choose samples
-    x = (1:1:num_samples); % Choose samples in numeric order
+    if rand
+        x = randperm(num_samples); % Randomly choose samples
+    else
+        x = (1:1:num_samples); % Choose samples in numeric order
+    end
     for s=1:num_samples
         if s <= num_test
             testData((k-1)*num_test+s,1:end) = data{(k-1)*num_samples+x(s)};

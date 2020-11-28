@@ -1,4 +1,4 @@
-function [peaks_b, peaks_e] = segment_sum_en_AGM(folder, ofs, fs, sample_num)
+function [peaks_b, peaks_e] = segment_sum_en_AGM(folder, ofs, fs)
 %% Segments data from a folder using energy sum
 %   param folder: Folder with data
 %   param ofs: Orginial sampling rate
@@ -141,7 +141,8 @@ end
 %% Save as .mat
 labels = (0:1:num_key-1);
 rawdata = all_data;
-filename = sprintf('data_segmented/%s_SUM_AGM_%d.mat', date, sample_num);
+sample_num = randi([0 9999], 1, 1);
+filename = sprintf('data_segmented/%s_SUM-AGM_%04d.mat', folder, sample_num);
 save(filename, 'labels', 'data', 'num_key' ,'seginfo', 'rawdata');
 
 %% Augmentation

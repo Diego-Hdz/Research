@@ -1,9 +1,8 @@
-function [peaks_b, peaks_e] = segment_sum_en(folder, ofs, fs, sample_num)
+function [peaks_b, peaks_e] = segment_sum_en(folder, ofs, fs)
 %% Segments data from a folder using energy sum
 %   param folder: Folder with data
 %   param ofs: Orginial sampling rate
 %   param fs: Sampling rate to resample to (if desired)
-%   param sample_num: Identifying dataset number
 
 num_key = 10; % number of keys
 w_size = int32(0.025 * fs); % Window size for finding the mean energy?
@@ -164,7 +163,8 @@ end
 %% Save as .mat
 labels = (0:1:num_key-1);
 rawdata = all_data;
-filename = sprintf('data_segmented/%s_SUM_%d.mat', date, sample_num);
+sample_num = randi([0 9999], 1, 1);
+filename = sprintf('data_segmented/%s_SUM_%04d.mat', folder, sample_num);
 save(filename, 'labels', 'data', 'num_key' ,'seginfo', 'rawdata');
 
 %% Augmentation

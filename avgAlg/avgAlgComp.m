@@ -9,13 +9,13 @@ for i = 1: size(testData,1) % each row in testingData
     minDist = Inf;
     for a = 1: size(avgs,1)
         sample_i = norm(testData(i,1:end) - avgs(a,1:end));
-        disp(sample_i);
+        % disp(sample_i);
         if sample_i < minDist
             res(i) = a;
             minDist = sample_i;
         end
     end
-    disp('---------------');
+    % disp('---------------');
 end
 
 %% Calculate accuracy
@@ -25,4 +25,4 @@ for i = 1: length(res)
         acc = acc + 1;
     end
 end
-acc = acc / length(res);
+acc = acc / length(res) * 100;

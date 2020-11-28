@@ -62,5 +62,6 @@ end
 %% Save as .mat
 data = aug_data;
 labels = aug_labels;
-save(sprintf('data_augmented/%s_AUG_%d.mat', date, sample_num), 'labels', 'data', 'num_key' ,'seginfo', 'rawdata');
+filename = sprintf('data_augmented/%AUG_%04d.mat', sample_num);
+save(filename, 'labels', 'data', 'num_key' ,'seginfo', 'rawdata');
 end
