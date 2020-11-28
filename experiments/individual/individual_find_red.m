@@ -1,24 +1,24 @@
-function [red] = individual_find_red(i_data, avg, range)
+function [red] = individual_find_red(i_data, avg, num_samples, key, repeated)
 %% Calculates the red values of the individual experiment
 % Red values are the average euclidean distance of the samples of a 
-% certain key to the average vector of that key
-%   param i_data: the individual data
-%   param avg: the average vector
-%   param range: the range of samples to be considered
-
-% Repeatedly collected
-% dist = 0;
-% n = range(2) - range(1) + 1;
-% for s = range(1): range(2)
-%     dist = dist + norm(i_data{s} - avg);
-% end
-% red = (dist/n);
-
-% Sequentially collected
+% certain key to the average vector of that same key
+%   param i_data: The individual data
+%   param avg: The average vector
+%   param num_samples: The number of samples per key (30)
+%   param key: The key
 dist = 0;
-n = range(2) - range(1) + 1;
-for i = 1:10
-    index = (i-1)*30+((range(2)/30-1)+1);
-    dist = dist + norm(i_data{index} - avg);
+num_keys = length(i_data)/num_samples; % 300/30 = 10
+
+if repeated
+    % Repeatedly collected
+    key_range = (num_samples*key + 1:1:num_samples*key + num_samples);
+else
+    % Sequentially collected
+    key_range = (1:num_keys:length(i_data))+key;
 end
-red = (dist/n);
+
+for i = key_range
+    dist = dist + norm(i_data{i} - avg);
+end
+red = (dist/num_samples);
+end

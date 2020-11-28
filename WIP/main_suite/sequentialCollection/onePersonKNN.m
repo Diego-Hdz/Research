@@ -2,7 +2,7 @@
 % Uses a KNN and applies threefold cross-validation to classify data from one dataset
 %% Parameters
 clear; clc; close all;
-folder="data_segmented/10-Sep-2020_diego_30key_sum_P10.mat";
+folder="data_segmented/18-Sep-2020_diego_30key_sum_1.mat";
 load(folder, 'data');
 num_keys=10;
 num_samples=30;
@@ -22,13 +22,13 @@ start = datetime;
 data = applySGolay(data, 20, 41);
 data = concatenate(data);
 
-[trainingData,testData,trainingLabels,testLabels] = nnPrep_seq(data,num_keys,num_samples,num_train,num_test);
+[trainingData,testData,trainingLabels,testLabels] = nnPrep_seq(data,num_keys,num_train,num_test);
 best_acc = 0;
 for k=1:30
     [accuracy, ~] = knn(trainingData, trainingLabels, testData, testLabels, k);
     disp(accuracy);
-    if accuracy * 100 > best_acc
-        best_acc = accuracy * 100;
+    if accuracy > best_acc
+        best_acc = accuracy;
     end
 end
 [accuracy, ~] = knnWithModel(trainingData, trainingLabels, testData, testLabels, false);

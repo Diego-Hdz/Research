@@ -20,7 +20,7 @@ start = datetime;
 %data = applyMapStd(data);
 %data = applyGCC(data,1,0);
 data = concatenate(data);
-[trainingData,testData,trainingLabels,testLabels] = nnPrep_seq(data,num_keys,num_samples,num_train,num_test);
+[trainingData,testData,trainingLabels,testLabels] = nnPrep_seq(data,num_keys,num_train,num_test);
 
 trainingData = num2cell(trainingData,2);
 testData = num2cell(testData,2);

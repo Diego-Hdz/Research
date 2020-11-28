@@ -1,11 +1,11 @@
 function [filtered] = experiment0(folder, f, fs, sensor, axis)
 %% Tests the fact that we can filter out noise from data collected
-%   param folder: folder containing data
-%   param f: frequency to filter out
-%   param fs: sampling frequency
-%   param sample: data sample to graph (ex: 9)(0 - 9)
-%   param sensor: sensor data to use ('a' or 'g')
-%   param axis: sensor axis to use ('x' or 'y' or 'z')
+%   param folder: Folder containing data
+%   param f: Frequency to filter out
+%   param fs: Sampling frequency
+%   param sample: Data sample to graph (ex: 9)(0 - 9)
+%   param sensor: Sensor data to use ('a' or 'g')
+%   param axis: Sensor axis to use ('x' or 'y' or 'z')
 %% Load
 close all;
 load(folder, 'rawdata', 'seginfo');

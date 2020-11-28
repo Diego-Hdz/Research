@@ -6,6 +6,8 @@ clear; clc; close all;
 a1=0;a2=0;a3=0;a4=0;a5=0;
 num_keys=10;
 num_samples=30;
+num_train=20;
+num_test=10;
 kfold = 3;
 start = datetime;
 range = (1:1:num_samples/kfold);
@@ -26,7 +28,7 @@ for p=1:5
     
     best_acc = 0;
     for kf=1:kfold
-        best_acc = best_acc + threeFoldCrossValid_rep(data,num_keys,num_samples,range);
+        best_acc = best_acc + threeFoldCrossValid_rep(data,num_keys,num_samples,num_train,num_test,range);
         close all;
         range = range + num_samples/kfold;
     end

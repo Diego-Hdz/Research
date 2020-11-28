@@ -1,20 +1,21 @@
-function [avg_vector] = find_avg(data, range)
+function [avg_vector] = find_avg(data, num_samples, key, repeated)
 %% Calculate the average vector of a set of data
 %   param data: Input data
-%   param range: Key range (ex: [1, 30])
-
-% Repeatedly collected
-% avg_vector = zeros(1,length(data{range(1)}));
-% for i = range(1): range(2)
-%     avg_vector = avg_vector + data{i};
-% end
-% avg_vector = avg_vector/(range(2)-range(1)+1);
-
-% Sequentially collected
+%   param num_samples: Number of samples per key (30)
+%   param range: Range of data
+%   param repeated: True is data was collected repeatedly
 avg_vector = zeros(1,length(data{1}));
-for i = 1:10
-    index = (i-1)*30+((range(2)/30-1)+1);
-    avg_vector = avg_vector + data{index};
+
+if repeated    
+    % Repeatedly collected
+    key_range = (num_samples*key + 1:1:num_samples*key + num_samples);
+else
+    % Sequentially collected
+    key_range = (1:length(data)/num_samples:length(data))+key;
 end
-avg_vector = avg_vector/30;
+
+for i = key_range
+    avg_vector = avg_vector + data{i};
+end
+avg_vector = avg_vector/num_samples;
 end

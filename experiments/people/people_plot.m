@@ -1,4 +1,4 @@
-function [] = person_plot(red, grey, key)
+function [] = people_plot(red, grey, key)
 %% Creates a plot of the person experiment
 %   param red: the red points for the graph
 %   param grey: the grey points for the graph

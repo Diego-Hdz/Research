@@ -1,4 +1,4 @@
-function [] = Main(folder, fft_, gcc_, dtw_, knn_, svm_, bpnn_, hmm_)
+function [] = Main(folder, fft_, gcc_, dtw_, knn_, svm_, bpnn_, hmm_) %7
 %% Applies classification algorithms on segmented data
 % Runs functions and algorithms on segmented data; also runs some models
 %   param folder: Folder with segmented data
@@ -30,28 +30,8 @@ end
 %% Concatenate Data: accel-x, accel-y, accel-z, gyro-x, gyro-y, gyro-z
 data = concatenate(data);
 
-%% Separate Data into training set and test set
-trainingData = [];
-testData = [];
-counter = 1;
-i = 1;
-while i <= length(data)
-    if counter == 30
-        testData = [testData; data{i}];
-        counter = 1;
-    elseif counter > 20
-        testData = [testData; data{i}];
-        counter = counter + 1;
-    else
-        trainingData = [trainingData; data{i}];
-        counter = counter + 1;
-    end
-    i = i + 1;
-end
-
-%% Prepare Labels
-trainingLabels = repelem([0, 1, 2, 3, 4, 5, 6, 7, 8, 9], 20).';
-testLabels = repelem([0, 1, 2, 3, 4, 5, 6, 7, 8, 9], 10).';
+%% Prepare training/testing data/labels
+[trainingData,testData,trainingLabels,testLabels] = nnPrep_rep(data,10,30,20,10);
 
 %% KNN
 if(knn_ == true)

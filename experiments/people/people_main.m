@@ -5,7 +5,9 @@ p2_file = "15-Jul-2020_diego_10keyP2.mat";
 p3_file = "15-Jul-2020_diego_10keyP3.mat";
 p4_file = "15-Jul-2020_diego_10keyP4.mat";
 p5_file = "15-Jul-2020_diego_10keyP5.mat";
+repeated = true;
+num_samples = 30;
 
 for i=0:9
-    [grey, red] = people(p1_file, p2_file, p3_file, p4_file, p5_file, i);
+    [grey, red] = people(p1_file, p2_file, p3_file, p4_file, p5_file, i, num_samples, repeated);
 end

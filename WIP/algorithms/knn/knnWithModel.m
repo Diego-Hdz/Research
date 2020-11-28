@@ -25,10 +25,10 @@ end
 acc = acc / length(testLabels) * 100;
 
 %% KNN with DTW implementation
+acc_dtw = 0;
 if dtw_ == true
     allInputs = trainingData';
     truth = trainingLabels;
-    acc_dtw = 0;
     bestKValue = 1;
     bestGuess = [];
     

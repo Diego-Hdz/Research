@@ -4,6 +4,8 @@
 clear; clc; close all;
 num_keys=10;
 num_samples=30;
+num_train=20;
+num_test=10;
 kfold = 3;
 start = datetime;
 range = (1:1:num_samples/kfold);
@@ -24,7 +26,7 @@ data = concatenate(data);
 
 best_acc = zeros(1,3);
 for kf=1:kfold
-    best_acc(kf) = threeFoldCrossValidFunc_seq(data,num_keys,num_samples,range);
+    best_acc(kf) = threeFoldCrossValidFunc_seq(data,num_keys,num_train,num_test,range);
     close all;
     range = range + num_samples/kfold;
 end
