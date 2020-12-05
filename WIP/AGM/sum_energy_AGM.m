@@ -1,4 +1,4 @@
-function [sum_energy, unfilteredData] = sum_energy_AGM(rawdata, fs, ofs)
+function [sum_energy, unfilteredData] = sum_energy_AGM(rawdata, fs, ofs, w_size, threshold)
 %% Find Energy based off energy sum (AGM data)
 %   param rawdata: raw data
 %   param fs: original sampling rate

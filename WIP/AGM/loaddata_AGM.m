@@ -16,10 +16,10 @@ a_matrix(:,1) = [];
 g_matrix = readmatrix(g_filename, 'Range', 1);
 g_matrix(:,1) = [];
 m_matrix = audioread(m_filename);
-m_matrix(:,1) = [];
+m_matrix = m_matrix(5000:end);
 
 %% Build Struct
-tempStruct = struct("a", struct("x", [], "y", [], "z", []), "g", struct("x", [], "y", [], "z", []), "m");
+tempStruct = struct("a", struct("x", [], "y", [], "z", []), "g", struct("x", [], "y", [], "z", []), "m", []);
 tempStruct.a.x = a_matrix(1,:);
 tempStruct.a.y = a_matrix(2,:);
 tempStruct.a.z = a_matrix(3,:);

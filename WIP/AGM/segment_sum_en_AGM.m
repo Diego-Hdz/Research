@@ -26,7 +26,7 @@ for i=0:num_key - 1
     rawdata = loaddata_AGM(folder, i);
     
      %% Find Energy based off energy sum
-    [sum_energy, unfilteredData] = sum_energy_AGM(rawdata, fs, ofs);
+    [sum_energy, unfilteredData] = sum_energy_AGM(rawdata, fs, ofs, w_size, threshold);
     
     %% Find Events
     pass = false;
